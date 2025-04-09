@@ -30,7 +30,7 @@ async function summarizeWithCohere(text) {
       },
       {
         headers: {
-          "Authorization": "Bearer X0AOfSL8bjqdCErxJ8BhmBeAiyo2keIMJZ8ZolVL",
+          "Authorization": `Bearer ${process.env.COHERE_API_KEY}`,
           "Content-Type": "application/json",
         },
       }
