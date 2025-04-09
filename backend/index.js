@@ -15,7 +15,6 @@ const upload = multer({ storage: multer.memoryStorage() });
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// 🧠 Summarize with Cohere
 
 
 async function summarizeWithCohere(text) {
@@ -24,8 +23,8 @@ async function summarizeWithCohere(text) {
       "https://api.cohere.ai/v1/summarize",
       {
         text: text,
-        length: "medium", // short, medium, long
-        format: "paragraph", // or "bullets"
+        length: "medium", 
+        format: "paragraph", 
         model: "command",
       },
       {
