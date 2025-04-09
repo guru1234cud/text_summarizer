@@ -1,37 +1,45 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const multer = require("multer");
 const pdfParse = require("pdf-parse");
-const mammoth = require("mammoth"); // For .docx
-const axios = require('axios')
+const mammoth = require("mammoth"); 
+const axios = require('axios');
 const app = express();
-app.use(cors());
-
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true
+}));
 const upload = multer({ storage: multer.memoryStorage() });
 
-async function summarizeWithHuggingFace(text) {
-  const MAX_CHARS = 3000;
-  const safeText = text.slice(0, MAX_CHARS);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
+// 🧠 Summarize with Cohere
+
+
+async function summarizeWithCohere(text) {
   try {
     const response = await axios.post(
-      "https://api-inference.huggingface.co/models/facebook/bart-large-cnn",
-      { inputs: safeText },
+      "https://api.cohere.ai/v1/summarize",
+      {
+        text: text,
+        length: "medium", // short, medium, long
+        format: "paragraph", // or "bullets"
+        model: "command",
+      },
       {
         headers: {
-          Authorization: "Bearer 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", // optional if using public access
+          "Authorization": "Bearer X0AOfSL8bjqdCErxJ8BhmBeAiyo2keIMJZ8ZolVL",
+          "Content-Type": "application/json",
         },
       }
     );
 
-    if (Array.isArray(response.data)) {
-      return response.data[0].summary_text;
-    } else {
-      return "⚠️ HuggingFace response error: No summary found.";
-    }
+    return response.data.summary || "⚠️ No summary returned.";
   } catch (err) {
-    console.error("HuggingFace error:", err?.response?.data || err.message);
-    return "⚠️ Failed to summarize using HuggingFace.";
+    console.error("Cohere API error:", err.response?.data || err.message);
+    return "⚠️ Failed to summarize using Cohere.";
   }
 }
 
@@ -63,10 +71,10 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
 
     console.log(`🧾 Extracted text (${originalname}):\n`, text.slice(0, 300));
 
-    // ✅ Summarize with DeepSeek
-    const summary = await summarizeWithHuggingFace(text);
-
-    // ✅ Final Response
+    const summary = await summarizeWithCohere(text);
+    console.log(" Received file:", req);
+    console.log(res.summary);
+     
     res.json({
       filename: originalname,
       text,
