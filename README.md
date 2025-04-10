@@ -28,7 +28,7 @@ A lightweight full-stack web app that allows users to upload documents (PDF, DOC
 ```bash
 git clone https://github.com/your-username/text-summarizer.git
 cd text-summarizer
-
+```
 ## 📁 Folder Structure
 
 text-summarizer/
