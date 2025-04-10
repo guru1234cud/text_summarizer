@@ -25,7 +25,7 @@ const Login = ({ onLogin }) => {
   return (
     <div className="container vh-100 d-flex justify-content-center align-items-center bg-light">
       <div className="card shadow rounded-4 p-4" style={{ maxWidth: "400px", width: "100%" }}>
-        <h2 className="text-center mb-4">Login to Summarizer</h2>
+        <h2 className="text-center mb-4">Login to Notezy</h2>
 
         {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
 

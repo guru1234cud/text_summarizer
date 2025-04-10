@@ -13,7 +13,7 @@ const Navbar = () => {
                     <span className="visually-hidden">(current)</span></Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to="/favorites">favorites</Link>
+                    <Link className="nav-link" to="/favorites">Important</Link>
                 </li>
                 <li className="nav-item">
                     <Link className="nav-link " to="/login">Logout</Link>

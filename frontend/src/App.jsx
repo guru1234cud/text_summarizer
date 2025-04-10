@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
+import Favorites from "./pages/Favorites";
 
 const ProtectedRoute = ({ isLoggedIn, children }) => {
   return isLoggedIn ? children : <Navigate to="/login" replace />;
@@ -32,7 +33,7 @@ function App() {
           path="/favorites"
           element={
             <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <Home />
+              <Favorites />
             </ProtectedRoute>
           }
         />
