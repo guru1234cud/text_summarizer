@@ -31,14 +31,5 @@ cd text-summarizer
 ```
 ## 📁 Folder Structure
 
-text-summarizer/
-│
-├── backend/
-│   └── index.js
-│
-└── frontend/
-    ├── src/
-    │   ├── pages/
-    │   ├── components/
-    │   └── Context/
+text-summarizer/ ├── backend/ │ ├── index.js │ ├── routes/ │ └── controllers/ │ └── frontend/ ├── public/ ├── src/ │ ├── components/ │ ├── pages/ │ ├── Context/ │ └── App.jsx └── vite.config.js
 
